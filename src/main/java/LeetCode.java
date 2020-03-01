@@ -3,8 +3,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class LeetCode {
-
-
     public int numberOfSteps (int num) {
         int steps = Integer.MAX_VALUE;
         while (num != 0) {
