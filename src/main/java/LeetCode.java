@@ -432,6 +432,65 @@ public class LeetCode {
         return  result;
     }
 
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> l1 = new ArrayList<>();
+        List<Integer> l2 = new ArrayList<>();
+
+        findLeaf(root1, l1);
+        findLeaf(root2, l2);
+        System.out.println(l1);
+        System.out.println(l2);
+
+        if(l1.size() != l2.size()) {
+            return false;
+        }
+        else {
+            for(int i = 0; i < l1.size(); i++) {
+                int r1 = l1.get(i);
+                int r2 = l2.get(i);
+                if(r1 != r2) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    private void findLeaf(TreeNode root, List<Integer> list) {
+        if(root == null) {
+            return;
+        }
+        if(root.left == null && root.right == null) {
+            list.add(root.val);
+        }
+        findLeaf(root.left, list);
+        findLeaf(root.right, list);
+
+    }
+
+    public String[] findOcurrences(String text, String first, String second) {
+        List<String> list = new ArrayList<>();
+        String[] array = text.split(" ");
+        for(int i = 0; i < array.length; i++) {
+            String curr = array[i];
+            boolean alert = false;
+            if(curr.equals(first)) {
+                alert = true;
+            }
+            if(alert && i+1 < array.length) {
+                String next = array[i + 1];
+                if(next.equals(second) && i + 2 < array.length) {
+                    list.add(array[i + 2]);
+                }
+            }
+        }
+
+        String[] result = new String[list.size()];
+        for(int i = 0; i < list.size(); i++) {
+            result[i] = list.get(i);
+        }
+        return result;
+    }
 
 
     public static void main(final String[] args) throws Exception {
@@ -445,4 +504,13 @@ public class LeetCode {
 
 
     }
+
+    public class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode(int x) { val = x; }
+    }
 }
+
+
